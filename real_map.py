@@ -3,8 +3,9 @@ from geopy.distance import distance
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
+from pansi import ansi
 
-map_file = "test_map_data/test_01.geojson"
+map_file = "test_map_data/test_02.geojson"
 
 with open(map_file) as map_data_raw:
     map_data = json.load(map_data_raw)
@@ -43,5 +44,10 @@ for key, edge in map_data_edges.items():
             continue
 
 G.add_nodes_from(nodes)
-nx.draw(G, pos, node_size = 1)
+print(
+    "Graph is connected"
+    if nx.is_connected(G)
+    else f"{ansi.red}Warning: Graph is not connected{ansi.reset}"
+)
+nx.draw(G, pos, node_size=1)
 plt.show()
