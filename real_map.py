@@ -43,5 +43,5 @@ for key, edge in map_data_edges.items():
             continue
 
 G.add_nodes_from(nodes)
-nx.draw_networkx_edges(G, pos)
+nx.draw(G, pos, node_size = 1)
 plt.show()
