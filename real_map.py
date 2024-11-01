@@ -43,16 +43,16 @@ def generate_map_graph(map_file: str=None):
                 continue
 
     G.add_nodes_from(nodes)
+    print(
+        "Graph is connected"
+        if nx.is_connected(G)
+        else f"{ansi.red}Warning: Graph is not connected{ansi.reset}"
+    )
     return (G, pos)
 
 
 if __name__ == "__main__":
     map_file = "test_map_data/test_02.geojson"
     G, pos = generate_map_graph(map_file)
-    print(
-        "Graph is connected"
-        if nx.is_connected(G)
-        else f"{ansi.red}Warning: Graph is not connected{ansi.reset}"
-    )
     nx.draw(G, pos, node_size=1)
     plt.show()
