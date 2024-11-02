@@ -35,9 +35,9 @@ def generate_map_graph(map_file: str=None):
                 G.add_edge(
                     start_node,
                     edge[i + 1],
-                    length=distance(
+                    length=float(str(distance(
                         map_data_nodes[start_node], map_data_nodes[edge[i + 1]]
-                    ),
+                    ))[:-3]),  # Conversion to float and dropping of the " km" at the end of the string
                 )
             except IndexError:
                 continue
@@ -49,7 +49,6 @@ def generate_map_graph(map_file: str=None):
         else f"{ansi.red}Warning: Graph is not connected{ansi.reset}"
     )
     return (G, pos)
-
 
 if __name__ == "__main__":
     map_file = "test_map_data/test_02.geojson"
