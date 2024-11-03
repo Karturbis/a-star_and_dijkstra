@@ -29,7 +29,7 @@ def generate_map_graph(map_file: str=None):
         pos[node] = np.array([position[0], position[1]])
 
 
-    for key, edge in map_data_edges.items():
+    for _, edge in map_data_edges.items():
         for i, start_node in enumerate(edge):
             try:
                 G.add_edge(
