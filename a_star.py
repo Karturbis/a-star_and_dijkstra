@@ -25,7 +25,7 @@ def a_star(G, pos, start_node, end_node, heuristic):
     while priority_queue:
         # Extract values from the element with smallest heuristic and
         # delete it from the priority_queue:
-        current_heuristic, current_node, current_spf = heapq.heappop(priority_queue)
+        _, current_node, current_spf = heapq.heappop(priority_queue)
         # check if node is already finished:
         if current_node in shortest_path_finished:
             continue
@@ -83,7 +83,7 @@ def flatearther_dis(pos, node1, node2):
     pretending the earth is a flat surface."""
     return math.sqrt(abs(pos[node1][0] - pos[node2][0])**2 + abs(pos[node1][1] - pos[node2][1])**2)
 
-def none_heuristic(pos, node1, node2):
+def none_heuristic(*arg):
     return 0
 
 if __name__ == "__main__":
