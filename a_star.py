@@ -104,4 +104,3 @@ if __name__ == "__main__":
     G, pos, edge_labels={(u, v): d["weight"] for u, v, d in G.edges(data=True)}
 )
     plt.show()
-
