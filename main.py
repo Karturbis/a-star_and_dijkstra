@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 from real_map import generate_map_graph
 from dijkstra import dijkstra
 from a_star import a_star
-from a_star import distance
+from a_star import geopy_dis
+from a_star import flatearther_dis
 
 
 def main(G, pos, algorithm, start_node, end_node):
@@ -11,7 +12,7 @@ def main(G, pos, algorithm, start_node, end_node):
         algorithm = a_star
     else:
         algorithm = dijkstra
-    path_length, path = algorithm(G, pos, start_node, end_node, distance)
+    path_length, path = algorithm(G, pos, start_node, end_node, geopy_dis)
     edges = []
     path_string_printable = f"{start_node}"
     for i, node in enumerate(path):
@@ -22,7 +23,6 @@ def main(G, pos, algorithm, start_node, end_node):
             pass
     print(f"The shortest path from {start_node} to {end_node} is: {path_string_printable}")
     print(f"Pathlength is: {path_length}")
-    colors = nx.get_edge_attributes(G, "color").values()
     nx.draw(G, pos, with_labels=False, node_size=0)
     nx.draw_networkx_edges(G, pos, G.edges(), edge_color='k')
     #nx.draw_networkx_edge_labels(
