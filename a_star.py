@@ -19,6 +19,7 @@ def a_star(G, pos, start_node, end_node, heuristic):
     shortest_path_finished = {}
 
     if start_node == end_node:
+        print("Startnode equals endnode.")
         return 0, start_node
 
     while priority_queue:
