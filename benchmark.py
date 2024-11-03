@@ -13,7 +13,12 @@ ITERATIONS = 100
 print(f"Seed = {SEED}")  # printing the seed at the begin, so if the program crashes, it is printed
 random.seed(SEED)
 
-G, pos = generate_map_graph()
+G = nx.binomial_graph(1000, 56)
+pos = nx.spring_layout(G)
+
+weights = [random.randint(0, 100 + i) for i in range(len(G.edges()))]
+
+nx.set_edge_attributes(G, values = 6, name = 'weight')
 
 nodes = list(G.nodes())
 
@@ -31,28 +36,25 @@ for i in range(ITERATIONS):
     #node_2 = 271900861
     print(node_2)
     td = time.time()
-    try:
-        path_djk = dijkstra(G, pos, node_1, node_2)
-    except Exception:
-        print("An Error has occured")
+
+    path_djk = dijkstra(G, pos, node_1, node_2)
     tda += time.time() - td
     ta = time.time()
     try:
         path_ast = a_star(G, pos, node_1, node_2, flatearther_dis)
     except Exception:
-        print("An Error has occured")
+        print(f"Error {e.message} has occured")
     taa += time.time() - ta
-    tg = time.time()
+    """tg = time.time()
     try:
         path_gas = a_star(G, pos, node_1, node_2, geopy_dis)
     except Exception:
-        print("An Error has occured")
-    tga += time.time() - tg
+        print(f"Error {e} has occured")
+    tga += time.time() - tg"""
     tn = time.time()
-    try:
-        path_nx = nx.shortest_path(G, node_1, node_2, weight="weight")
-    except Exception:
-        print("An Error has occured")
+
+    path_nx = nx.shortest_path(G, node_1, node_2, weight="weight")
+
     tna += time.time() - tn
 
 # printing the average time each algorithm needs
