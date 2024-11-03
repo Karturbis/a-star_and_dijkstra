@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pansi import ansi
 
-FALLBACK_MAP_FILE = "test_map_data/test_02.geojson"
+FALLBACK_MAP_FILE = "test_map_data/test_03.geojson"
 
 def generate_map_graph(map_file: str=None):
     if not map_file:
@@ -51,7 +51,7 @@ def generate_map_graph(map_file: str=None):
     return (G, pos)
 
 if __name__ == "__main__":
-    map_file = "test_map_data/test_02.geojson"
+    map_file = "test_map_data/test_03.geojson"
     G, pos = generate_map_graph(map_file)
     nx.draw(G, pos, node_size=1)
     plt.show()
