@@ -35,7 +35,7 @@ def generate_map_graph(map_file: str=None):
                 G.add_edge(
                     start_node,
                     edge[i + 1],
-                    length=float(str(distance(
+                    weight=float(str(distance(
                         map_data_nodes[start_node], map_data_nodes[edge[i + 1]]
                     ))[:-3]),  # Conversion to float and dropping of the " km" at the end of the string
                 )
