@@ -1,10 +1,12 @@
 import heapq
+import time
+import math
 import geopy.distance as gpd
 import networkx as nx
 import matplotlib.pyplot as plt
 
 
-def a_star(G, start_node, end_node, heuristic, pos):
+def a_star(G, pos, start_node, end_node, heuristic):
     """Finds the shortest Path between to nodes
     in a given Graph using the A* algorithm."""
     if not heuristic:
@@ -16,6 +18,9 @@ def a_star(G, start_node, end_node, heuristic, pos):
     )
     visited = {start_node:(0, start_node)}
     shortest_path_finished = {}
+
+    if start_node == end_node:
+        return 0, start_node
 
     while priority_queue:
         # Extract values from the element with smallest heuristic and
@@ -55,8 +60,12 @@ def a_star(G, start_node, end_node, heuristic, pos):
     path_data = []
     parent = end_node
     while not parent == start_node:
-        path_data.append(shortest_path_finished[parent])
-        parent = shortest_path_finished[parent][1]
+        try:
+            path_data.append(shortest_path_finished[parent])
+            parent = shortest_path_finished[parent][1]
+        except KeyError:
+            print(f"No path from {start_node} to {end_node}.")
+            return 0, None
     pathlength = path_data[0][0]
     path = [i[1] for i in path_data]
     path.reverse()
@@ -64,10 +73,15 @@ def a_star(G, start_node, end_node, heuristic, pos):
     return pathlength, path
 
 
-def distance(pos, node1, node2):
+def geopy_dis(pos, node1, node2):
     """Function returns the geopraphical
     distance between to nodes in km as float."""
     return float(str((gpd.distance(pos[node1], pos[node2])))[:-3])
+
+def flatearther_dis(pos, node1, node2):
+    """Returns the distance betwenn to nodes,
+    pretending the earth is a flat surface."""
+    return math.sqrt(abs(pos[node1][0] - pos[node2][0])**2 + abs(pos[node1][1] - pos[node2][1])**2)
 
 def none_heuristic(pos, node1, node2):
     return 0
@@ -84,7 +98,7 @@ if __name__ == "__main__":
     G.add_edge("e", "h", weight=3)
     G.add_edge("g", "e", weight=1)
     pos = nx.spring_layout(G)
-    print(a_star(G, "d", "a", None, pos))
+    print(a_star(G, pos, "d", "a", None))
     nx.draw(G, pos, with_labels=True)
     nx.draw_networkx_edge_labels(
     G, pos, edge_labels={(u, v): d["weight"] for u, v, d in G.edges(data=True)}
