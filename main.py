@@ -6,9 +6,12 @@ from a_star import a_star
 from a_star import distance
 
 
-def main(algorithm, start_node, end_node):
-    G, pos = generate_map_graph()
-    path_length, path = algorithm(G, start_node, end_node, distance, pos)
+def main(G, pos, algorithm, start_node, end_node):
+    if algorithm == "a_star":
+        algorithm = a_star
+    else:
+        algorithm = dijkstra
+    path_length, path = algorithm(G, pos, start_node, end_node, distance)
     edges = []
     path_string_printable = f"{start_node}"
     for i, node in enumerate(path):
@@ -33,4 +36,5 @@ def main(algorithm, start_node, end_node):
 
 
 if __name__ == "__main__":
-    main(a_star, 1770439267, 11201847066)
+    G, pos = generate_map_graph()
+    main(G, pos, a_star, 1770439267, 11201847066,)
