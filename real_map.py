@@ -8,9 +8,13 @@ from pansi import ansi
 FALLBACK_MAP_FILE = "test_map_data/test_03.geojson"
 
 def generate_map_graph(map_file: str=None):
+    """Gererates a Graph from OSM data in overpass
+    turbo xml format. The positions of the Nodes
+    are their geo-coordinates, the edgelengths are
+    real distances in km"""
     if not map_file:
         map_file = FALLBACK_MAP_FILE
-    with open(map_file) as map_data_raw:
+    with open(map_file, encoding="UTF-8") as map_data_raw:
         map_data = json.load(map_data_raw)
     map_data_nodes = {}
     map_data_edges = {}
