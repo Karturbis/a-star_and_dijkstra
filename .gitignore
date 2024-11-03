@@ -1,3 +1,4 @@
 test*
 doc_text
 __pycache__
+.vscode
