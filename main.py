@@ -28,7 +28,9 @@ def main(G, pos, algorithm, start_node, end_node, heuristic=flatearther_dis):
     for i, node in enumerate(path):
         try:
             path_string_printable = f"{path_string_printable} -> {path[i+1]}"
-            edges.append((node, path[i + 1]))  # append all edges of the path to var edges
+            edges.append(
+                (node, path[i + 1])
+            )  # append all edges of the path to var edges
         except IndexError:
             pass
     print(
@@ -36,8 +38,12 @@ def main(G, pos, algorithm, start_node, end_node, heuristic=flatearther_dis):
     )
     print(f"Pathlength is: {path_length}")
     nx.draw(G, pos, with_labels=False, node_size=0)  # make the graph drawable
-    nx.draw_networkx_edges(G, pos, G.edges() - edges , edge_color="k")  # make not visited edges in black
-    nx.draw_networkx_edges(G, pos, edges, edge_color="r")  # make all edges of the path red
+    nx.draw_networkx_edges(
+        G, pos, G.edges() - edges, edge_color="k"
+    )  # make non path edges in black
+    nx.draw_networkx_edges(
+        G, pos, edges, edge_color="r"
+    )  # make all edges of the path red
     plt.show()  # open a window and draw the graph in it
 
 
@@ -49,4 +55,5 @@ if __name__ == "__main__":
         a_star,
         3428385949,  # position of the teachers parking lot
         3428399062,  # position of the rewe
+        flatearther_dis,  # using flatearther dis, because distances in G are small
     )
