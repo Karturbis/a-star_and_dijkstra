@@ -1,14 +1,17 @@
-import json
-from geopy.distance import distance
-import networkx as nx
-import numpy as np
-import matplotlib.pyplot as plt
-from pansi import ansi
+"""Generates a graph of a real map usong OSM
+data (https://osm.org) compiled by overpass turbo
+https://overpass-turbo.eu/s/1TBu"""
+import json  # use json files
+from geopy.distance import distance  # calculate the geographical distance
+import networkx as nx  # used to implement the graph of the map
+import numpy as np  # to use numpy arrays to update the position
+import matplotlib.pyplot as plt  # used to draw the graph
+from pansi import ansi  # used to make warnings red
 
 FALLBACK_MAP_FILE = "test_map_data/test_02.geojson"
 
 def generate_map_graph(map_file: str=None):
-    """Gererates a Graph from OSM data in overpass
+    """Gererates a graph from OSM data in overpass
     turbo xml format. The positions of the Nodes
     are their geo-coordinates, the edgelengths are
     real distances in km"""
