@@ -14,7 +14,7 @@ ITERATIONS = 100
 MIN_EDGE_LENGTH = 1
 MAX_EDGE_LENGTH = 100
 GRAPH_SIZE = 1000
-REAL_MAP = False
+REAL_MAP = True
 DRAW_GRAPH = True
 DRAW_EDGE_LABELS = False
 print(
@@ -41,11 +41,11 @@ tga = 0
 tna = 0
 
 for i in range(ITERATIONS):
-    node_1 = nodes[random.randint(1, len(nodes) - 1)]
-    # node_1 = 7660414077
+    #node_1 = nodes[random.randint(1, len(nodes) - 1)]
+    node_1 = 3428385949
     print(node_1)
-    node_2 = nodes[random.randint(1, len(nodes) - 1)]
-    # node_2 = 271900861
+    #node_2 = nodes[random.randint(1, len(nodes) - 1)]
+    node_2 = 3428399062
     print(node_2)
     td = time.time()
     path_djk = dijkstra(G, pos, node_1, node_2)
